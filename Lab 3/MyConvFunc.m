@@ -7,7 +7,8 @@ myFilter2 = [0 0 0; 0 -1 1; 0 0 0];
 % myFilter = myFilter'; % transpose
 
 convImg1 = MyConv(cece,myFilter1, 0);
-convImg2 = MyConv(cece,myFilter2, 0);
+% convImg2 = MyConv(cece,myFilter2, 0);
+convImg2 = convn(cece,myFilter1, 'same');
 
 figure
 subplot(1,2,1);
