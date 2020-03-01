@@ -12,44 +12,47 @@ cece = imread("Celica.jpg");
 
 
 %  Generate filter/s.
-myFilter = [0 1 0; 1 -4 -1; 0 -1 0];
+myFilter = [0 0 0; 0 -1 1; 0 0 0];
+% myFilter = [0 1 0; 1 -4 -1; 0 -1 0];
 % myFilter = [0 1 0; 0 -2 0; 0 -1 0];
 % myFilter1 = [0 0 0; 0 -1 0; 0 1 0];
 
 
 % Manipulate image/s.
-convImg1 = convn(cece,myFilter, 'same');
-convImg2 = MyConv(cece,myFilter, 255);
-
+% convImg1 = convn(cece,myFilter, 'same');
+% convImg2 = MyConv(cece,myFilter, 255);
 
 % With different colour models...
-ceceHSV = rgb2hsv(cece);
+% ceceHSV = rgb2hsv(cece);
+% ceceHSV = MyConv(ceceHSV,myFilter, 255);
+% ceceLAB = rgb2lab(cece);
+% ceceLAB = MyConv(ceceLAB,myFilter, 255);
+% ceceYCBCR = rgb2ycbcr(cece);
+% ceceYCBCR = MyConv(ceceYCBCR,myFilter, 255);
+ceceHSV = conv2;
 ceceHSV = MyConv(ceceHSV,myFilter, 255);
-ceceLAB = rgb2lab(cece);
-ceceLAB = MyConv(ceceLAB,myFilter, 255);
-ceceYCBCR = rgb2ycbcr(cece);
-ceceYCBCR = MyConv(ceceYCBCR,myFilter, 255);
 
 % Plot image/s.
-figure
-subplot(2,3,1);
-imshow(cece)
-title("Cece <3");
-subplot(2,3,2);
-imshow(convImg1)
-title("MatLab convn()");
-subplot(2,3,3);
-imshow(convImg2)
-title("MyConv()");
-subplot(2,3,4);
-imshow(ceceHSV)
-title("MyConv() HSV");
-subplot(2,3,5);
-imshow(ceceLAB)
-title("MyConv() L*A*B");
-subplot(2,3,6);
-imshow(ceceYCBCR)
-title("MyConv() YcBcR");
+imshow(ceceGrey)
+% figure
+% subplot(2,3,1);
+% imshow(cece)
+% title("Cece <3");
+% subplot(2,3,2);
+% imshow(convImg1)
+% title("MatLab convn()");
+% subplot(2,3,3);
+% imshow(convImg2)
+% title("MyConv()");
+% subplot(2,3,4);
+% imshow(ceceHSV)
+% title("MyConv() HSV");
+% subplot(2,3,5);
+% imshow(ceceLAB)
+% title("MyConv() L*A*B");
+% subplot(2,3,6);
+% imshow(ceceYCBCR)
+% title("MyConv() YcBcR");
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % METHODS %
