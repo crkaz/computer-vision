@@ -12,7 +12,7 @@ function [chArr, chNum] = GetOptimalChannel(im, hsv)
     end
     
     %
-    % [Experimental work in SelectHSVChannel.mlx and AllChHists.mlx in ...
+    % [Experimental work in SelectOptimalChannel.mlx and AllChHists.mlx in ...
     % ... /appendices) found 1/3 of HSV channels tend to isolate objects ...
     % ... quite well (first pass) and my 'noise value' - variance ...
     % ... successfully selected the 'best' channel in all given test images.]
@@ -21,8 +21,7 @@ function [chArr, chNum] = GetOptimalChannel(im, hsv)
     %
     if (hsv)
         im = rgb2hsv(im);
-    else
-        % Assume RGB.
+    else % RGB.
         im = im2double(im);
     end
     
@@ -37,33 +36,33 @@ function [chArr, chNum] = GetOptimalChannel(im, hsv)
     
     % Calculate difference between noise level and variance for each.
     if(hsv)
-        c1x = c1n - c1v;
-        c2x = c2n - c2v;
-        c3x = c3n - c3v;
-    else
-        % Assume RGB.
-        c1x = c1v;
-        c2x = c2v;
-        c3x = c3v;
+        c1x = roundn(c1n - c1v, -3);
+        c2x = roundn(c2n - c2v, -3);
+        c3x = roundn(c3n - c3v, -3);
+    else % RGB.
+        c1x = roundn(c1v, -3);
+        c2x = roundn(c2v, -3);
+        c3x = roundn(c3v, -3);
     end
     
-    % Select the channel with the lowest value.
+    % Select the channel with the lowest (HSV) or highest (RGB) value.
     if (hsv)
         X = min([c1x,c2x,c3x]);
-    else
-        % Assume RGB: get largest variance.
+    else % RGB
         X = max([c1x,c2x,c3x]);
     end
     
-    if (X == c1x)
-        chArr = c1;
-        chNum = 1;
+    % Select/return appropriate channel (where there are duplicate values ...
+    % ... the higher channel is preferred based off of experimantal findings.
+    if (X == c3x)
+        chArr = c3;
+        chNum = 3;
     elseif (X == c2x)
         chArr = c2;
         chNum = 2;
-    elseif (X == c3x)
-        chArr = c3;
-        chNum = 3;
+    elseif (X == c1x)
+        chArr = c1;
+        chNum = 1;
     end
 end
 

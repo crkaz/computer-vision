@@ -1,18 +1,21 @@
 function n = Process1(path)
-    original = imread(path);
-    oim = original; % For processing
+    oim = imread(path);
     
-    % % Denoise and enhance.
+    % Denoise and enhance.
     im = Denoise(oim);
     
-    % Binarize and extract starfish.
-    [~,~,ch3] = imsplit(im);
-    ch3 = ~imbinarize(ch3);
-    mask = bwareafilt(ch3, [500,2000000]);
+    % Get channel most suited for binarising and blob detection (inital mask).
+    ch = GetOptimalChannel(im, false);
+    
+    % Binarize.
+    mask = ~imbinarize(ch);
+    
+    % Extract starfish blobs using MSER and region props.
     maskall = MSERIsolateStarfish(mask);
 
-    % DRAW FINAL ROIS
-    DrawROIs(original, maskall);
+    % Draw bounding boxes on original image
+    DrawROIs(oim, maskall);
     
+    % Get starfish count.
     [~, n] = bwlabel(maskall);
 end

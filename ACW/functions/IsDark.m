@@ -3,7 +3,7 @@
 % ... of pixels above and below a the threshold.
 % 
 function bool = IsDark(im)
-    THRESHOLD = 165;
+    THRESHOLD = 150;
 
     bool = false;
     
