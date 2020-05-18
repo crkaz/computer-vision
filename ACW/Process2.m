@@ -1,4 +1,4 @@
-function n = Process2(path)
+function [finalMask, n] = Process2(path)
     figure
     oim = imread(path);
     imshow(oim);
@@ -9,12 +9,12 @@ function n = Process2(path)
     minBlobSize = imArea * 0.0015;%0.006
 
     % Orientate landscape for morphological ops.
-    [h,w,~] = size(oim);
-    if (h > w)
-        oim = rot90(oim);
-        oim = rot90(oim);
-        oim = rot90(oim);
-    end
+%     [h,w,~] = size(oim);
+%     if (h > w)
+%         oim = rot90(oim);
+%         oim = rot90(oim);
+%         oim = rot90(oim);
+%     end
 
     % % Denoise.
     im = oim;
@@ -157,9 +157,10 @@ function n = Process2(path)
 
 %     maskall = MSERIsolateStarfish(finalMask);
     maskall = finalMask;
-    
-    % DRAW FINAL ROIS
-    DrawROIs(oim, maskall);
+
+%     % DRAW FINAL ROIS
+%     DrawROIs(oim, maskall);
 
     [~, n] = bwlabel(maskall);
+    finalMask = maskall;
 end

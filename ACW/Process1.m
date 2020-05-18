@@ -1,4 +1,4 @@
-function n = Process1(path)
+function [finalMask, n] = Process1(path)
     oim = imread(path);
     
     % Denoise and enhance.
@@ -13,9 +13,8 @@ function n = Process1(path)
     % Extract starfish blobs using MSER and region props.
     maskall = MSERIsolateStarfish(mask);
 
-    % Draw bounding boxes on original image
-    DrawROIs(oim, maskall);
-    
     % Get starfish count.
     [~, n] = bwlabel(maskall);
+    
+    finalMask = maskall;
 end

@@ -1,5 +1,4 @@
 function imP = Denoise(im)
-    oim = im;
     % Apply median filter; this is a generally good filter for many images.     
     % (applying to each channel preserves the original colour).
     [c1,c2,c3] = imsplit(im);

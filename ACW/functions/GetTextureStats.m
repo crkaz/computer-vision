@@ -1,8 +1,8 @@
 % 
 % Return a table of texture statistics detailing regions in a given mask.
 % 
-function stats = GetTextureStats(im, mask)
-    stats = getTextureStats(im, mask); % Call private function.
+function statsTable = GetTextureStats(im, mask)
+    statsTable = getTextureStats(im, mask); % Call private function.
 end
 
 % ----------------------------------------

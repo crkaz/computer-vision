@@ -6,7 +6,6 @@ function maskall = MSERIsolateStarfish(mask)
     hold on;
     plot(regions,'showPixelList',true,'showEllipses',true);
 
-    
     stats = regionprops('table',mserCC,'all');
     prop = stats.MajorAxisLength < 500 ...
         & stats.Solidity > 0.3...
@@ -19,13 +18,10 @@ function maskall = MSERIsolateStarfish(mask)
         & stats.Extent < 0.45;
 
     regions = regions(prop);
-    regions.Location
-
     
     imshow(mask);
     hold on;
     plot(regions,'showPixelList',true,'showEllipses',false);
-
 
     % GET MASK WITH ONLY MSER DETECTIONS.
     maskall = false(size(mask));

@@ -4,12 +4,17 @@
 
 % Return a table of texture statistics detailing regions in a given mask.
 function statsTable = getTextureStats(im, mask)
-    props = regionprops(im, 'BoundingBox');
+    [~, n] = bwlabeln(mask);
+    if (n == 0)
+        error("There are no positive regions in the given mask");
+    end
+    
+    regions = regionprops(mask, 'BoundingBox');
 
     % Iterate over each connected component.
-    for i = 1 : length(props)
+    for i = 1 : length(regions)
         % Use the bounding box of the CC to create a crop of original img.
-        bb = props(i).BoundingBox;
+        bb = regions(i).BoundingBox;
         roi = imcrop(im, bb);
         
         % Calculate stats using given functions. Var names = tbl header names.
