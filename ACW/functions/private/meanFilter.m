@@ -6,9 +6,9 @@
 % anything other than same right now, and no default params make it
 % tedious.
 function filtered = MeanFilter(im, nhood)
-    % ensure neighbourhood is an odd number > 1.
+    % Ensure neighbourhood is an odd number > 2.
     if (mod(nhood, 2) == 0 || nhood < 3)
-        error("MeanFilter(): nhood must be odd and greater than 3");
+        error("MeanFilter(): nhood must be odd and at least 3");
     end
 
     dims = ndims(im);
@@ -24,7 +24,7 @@ end
 
 % For 2D arrays.
 function filtered = meanFilter2(im, nhood)
-    div = nhood^2;
+    div = nhood^2; % Ensure divisor scales with neigbourhood size.
     filtered = imfilter(im,ones(nhood)/div, 'same');
 end
 

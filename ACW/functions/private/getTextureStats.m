@@ -6,9 +6,11 @@
 function statsTable = getTextureStats(im, mask)
     [~, n] = bwlabeln(mask);
     if (n == 0)
-        error("There are no positive regions in the given mask");
+        statsTable = "There were no positive regions in the given mask to extract textures from.";
+        return
     end
     
+    % Get the BB regions for creating crops of original image.
     regions = regionprops(mask, 'BoundingBox');
 
     % Iterate over each connected component.
@@ -17,7 +19,7 @@ function statsTable = getTextureStats(im, mask)
         bb = regions(i).BoundingBox;
         roi = imcrop(im, bb);
         
-        % Calculate stats using given functions. Var names = tbl header names.
+        % Calculate stats using provided functions. Var names = tbl header names.
         txStats = statxture(roi);
         AvgGrayLvl = txStats(1);
         AvgContrst = txStats(2);

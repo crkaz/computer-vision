@@ -19,19 +19,21 @@ end
 
 % For 2D arrays.
 function noiseLevel = getNoiseLevel2(im)
+    % Scale images according to their range e.g. 0-255 or 0-1.     
     grayscaler = 1;
     if (max(im(:)) <= 1)
         grayscaler = 255; 
     end
     
-    
-    % Create a filtered version of the image.
+    % Create a filtered version of the image. 5x5 used because testing
+    % accross all images showed improved masking as a result.
     filtered = MeanFilter(im, 5);
     
     % Calculate difference between the original and filtered image.
     diffMask = filtered - im;
 
-    % If a pixel diff is > noiseThresh, consider it to be noise.
+    % If a pixel diff is > noiseThresh, consider it to be noise. Threshold
+    % was determined by checking observing outputs across all images.
     NOISE_THRESH = 30 / grayscaler;
     noise = diffMask > NOISE_THRESH;
 

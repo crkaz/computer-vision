@@ -20,9 +20,11 @@ end
 % For 2D arrays.
 function bool = isLowContrast2(im)
     % Thresholds explained: if 85% of the pixels are within 100px range ...
-    % ... centred around the mean, assume low contrast.
+    % ... centered around the mean, assume low contrast. These values
+    % ... determined by obseving histograms in exploratory work and after
+    % ... testing the method accross all images.
     PERCENTAGE_THRESHOLD = 0.85;
-    RANGE_THRESHOLD = 50;
+    RANGE_THRESHOLD = 50; % Actual 'window' is 2x this.
     
     % Calculate range of pixel values; small range suggests low contrast.
     theMin = min(im(:));

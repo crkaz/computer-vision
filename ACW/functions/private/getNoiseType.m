@@ -19,13 +19,16 @@ end
 
 % For 2D arrays.
 function noiseType = getNoiseType2(im)
-    % Create a filtered version of the image.
+    % Create a filtered version of the image. 5x5 used because testing
+    % accross all images showed improved masking as a result.
     filtered = MeanFilter(im, 5);
     
     % Calculate difference between the original and filtered image.
     diffMask = filtered - im;
 
-    % Get avg gradient of diffMask hist (100 bins) to estimate noise type.     
+    % Get avg gradient of diffMask hist(100 bins) to estimate noise type.
+    % ... 100 bins was used to smooth the gradient of the histogram and 
+    % ... therefore support the use of the median for the avg.
     myhist = imhist(diffMask,100);
     histAvgGradient = median(myhist);
     if (histAvgGradient < 5)

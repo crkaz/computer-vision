@@ -1,13 +1,20 @@
+%
+% ThresholdRGB dynamically threshols an RGB image based on the ...
+% distribution of its colour channels. The skeleton of the function is
+% derived from the MATLAB colour thresholding app, but all conditional
+% beheaviours (and values) are implemented after analysing the differences
+% between the distributions of colour channels in images.
+% The values are otherwise random/as determined by trial and error to
+% acheive the best segmentations.
+% 
 function [BW,maskedRGBImage] = ThresholdRGB(RGB)
 [r,g,b] = imsplit(RGB);
 rMean = mean2(r);
-% rStd = std2(r)
 gMean = mean2(g);
 gStd = std2(g);
 bMean = mean2(b);
 bStd = std2(b);
 bLogStd = log(bStd);
-% gLogStd = log(gStd);
 
 bVal = 255;
 gVal = 255;

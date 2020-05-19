@@ -8,7 +8,6 @@ function bool = IsCluttered(im)
     dims = ndims(im);
     
     if (dims == 3 || dims == 2)
-        
         level = graythresh(im);
         bw = imbinarize(im, level);
         
