@@ -1,3 +1,4 @@
+% Format and display stepwise output for pipeline 
 function outputProcess(r,c, oim, p1Mask, p2Mask, finalMask)
     R = r;
     C = c;

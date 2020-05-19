@@ -1,3 +1,4 @@
+% Format and display stepwise output for pipeline 
 function outputP1(r,c,oim, denoised, ch, chN, bw, mserMask, mserRegions)
     R = r;
     C = c;

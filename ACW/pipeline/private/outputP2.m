@@ -1,3 +1,4 @@
+% Format and display stepwise output for pipeline 
 function outputP2(r,c, oim, denoised, enhanced, bw, morphed)
     R = r;
     C = c;

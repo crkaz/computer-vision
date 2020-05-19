@@ -7,8 +7,9 @@ function [finalMask, n] = Process(path, outputs)
     [p2Mask, ~] = p2(path, outputs); % Pipeline 2 : good/inaccurate masks.
     finalMask = p2Mask; % If no blobs detected in p1 we just use p2 mask.
     
-    % Only run p1 on non-cluttered/occluded images, then combine ...
-    ... with output of p2.
+    
+    % Run p1 on non-cluttered/occluded images, then combine with output
+    % ... of p2.
     runP1 = not(IsCluttered(oim));
     if (runP1)
         [p1Mask, ~] = p1(path, outputs);
@@ -57,14 +58,16 @@ function [finalMask, n] = Process(path, outputs)
         end
     end
 
+    
     % Output all steps in one figure.
     if (outputs)
         if (runP1)
             outputProcess(2,3, oim, p1Mask, p2Mask, finalMask);
         else
-            outputProcess(1,5, oim, "null", p2Mask, finalMask);
+            outputProcess(2,3, oim, "null", p2Mask, finalMask);
         end
     end
+    
     
     % Get final mask and number of detections.
     [finalMask, n] = bwlabel(finalMask);
