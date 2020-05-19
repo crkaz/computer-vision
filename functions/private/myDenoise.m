@@ -5,6 +5,11 @@
 % Conditionally/locally filters the image for smoother images without
 % ... sacrificing too much detail.
 function imP = myDenoise(im)
+    % Scale images according to their range e.g. 0-255 or 0-1.     
+    grayscaler = 1;
+    if (max(im(:)) <= 1)
+        grayscaler = 255; 
+    end
     oim = im;
     
     % Create an arbritarily denoised version.
@@ -17,11 +22,11 @@ function imP = myDenoise(im)
 
     % Threshold pixels that are significantly different and assume them ...
     % ... to be noise. **
-    noiseThresh = 30;
+    NOISE_THRESH = 30 / grayscaler;
     [n1,n2,n3] = imsplit(diffMask);
-    n1 = n1 > noiseThresh;
-    n2 = n2 > noiseThresh;
-    n3 = n3 > noiseThresh;
+    n1 = n1 > NOISE_THRESH;
+    n2 = n2 > NOISE_THRESH;
+    n3 = n3 > NOISE_THRESH;
 
     % Replace noisy pixels with filtered pixels. Conditional filtering ...
     % ... imroves detail retention. **
