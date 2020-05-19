@@ -6,7 +6,7 @@ function outputP1(r,c,oim, denoised, ch, chN, bw, mserMask, mserRegions)
     i = 1;
     
     figure
-    disp("PIPELINE 1 (P1) STEPS");
+    disp("STEP #2 : PIPELINE 1 (P1)");
     subplot(R,C,n);
     imshow(oim);
     title("Original");

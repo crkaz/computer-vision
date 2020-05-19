@@ -5,7 +5,7 @@ function outputProcess(r,c, oim, p1Mask, p2Mask, finalMask)
     n = 1;
     
     figure
-    disp("OVERALL PIPELINE (P1&P2 COMPOSITE) STEPS");
+    disp("STEP #3 : FINAL OUTPUT (P1&P2 COMPOSITE)");
     subplot(R,C,n);
     imshow(oim);
     title("Original");
@@ -14,6 +14,10 @@ function outputProcess(r,c, oim, p1Mask, p2Mask, finalMask)
     subplot(R,C,n);
     try
         if (p1Mask == "null")
+            % Create blank "image".
+            [h,w] = size(finalMask);
+            whiteImage = 255 * ones(h, w, 'uint8');
+            imshow(whiteImage);
             title("P1 DIDN'T RUN");
         end
     catch

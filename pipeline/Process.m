@@ -1,4 +1,7 @@
-function [finalMask, n] = Process(path, outputs)
+% Main pipeline function.
+% "Your pipeline should return a count, and the bounding box positions of
+% ... the detected starfish."
+function [bbs, count, finalMask] = Process(path, outputs)
     addpath('./functions/');
     
     oim = imread(path);
@@ -25,13 +28,19 @@ function [finalMask, n] = Process(path, outputs)
     % Output all steps in one figure.
     if (outputs)
         if (runP1)
-            outputProcess(2,3, oim, p1Mask, p2Mask, finalMask);
+            outputProcess(1,5, oim, p1Mask, p2Mask, finalMask);
         else
-            outputProcess(2,3, oim, "null", p2Mask, finalMask);
+            outputProcess(1,5, oim, "null", p2Mask, finalMask);
         end
     end
     
     
     % Get final mask and number of detections.
-    [finalMask, n] = bwlabel(finalMask);
+    %     [finalMask, n] = bwlabel(finalMask);
+
+    % "Your pipeline should return a count, and the bounding box positions of
+    % ... the detected starfish."
+    ccs = bwconncomp(finalMask); % get "connected components" in the binary mask.
+    bbs = regionprops(ccs,'Boundingbox'); % Get region info from region properties
+    count = length(bbs);
 end

@@ -6,7 +6,7 @@ function outputP2(r,c, oim, denoised, enhanced, bw, morphed)
     i = 1;
     
     figure
-    disp("PIPELINE 2 (P2) STEPS");
+    disp("STEP #1 : PIPELINE 2 (P2)");
     subplot(R,C,n);
     imshow(oim);
     title("Original");

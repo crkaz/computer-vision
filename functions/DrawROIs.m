@@ -6,7 +6,7 @@
 % 
 function bbs = DrawROIs(mask)
     COLOUR = 'b';
-    LINE_THICKNESS = 1;
+    LINE_THICKNESS = 2;
     CIRCLE = false;
     
     ccs = bwconncomp(mask); % get "connected components" in the binary mask.
